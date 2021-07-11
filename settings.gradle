@@ -1,0 +1,3 @@
+rootProject.name = "dataart-android"
+include ':dataart-sample-phone'
+include ':dataart'
