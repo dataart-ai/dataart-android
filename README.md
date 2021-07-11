@@ -1,10 +1,94 @@
 # DataArt Android Client
 
+[![](https://jitpack.io/v/dataart-ai/dataart-android.svg)](https://jitpack.io/#dataart-ai/dataart-android)
+![Test Status](https://github.com/dataart-ai/dataart-android/actions/workflows/test.yml/badge.svg?branch=master)
+
 DataArt platform client for Android.
+
+<p>
+    <img src="./.github/img/project-banner.jpg" width="600">
+</p>
 
 ## Getting Started
 
+Add `jitpack.io` repository to your root `build.gradle` file:
+
+```
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+Now add the following dependency to your app `build.gradle` file:
+
+```
+dependencies {
+    implementation 'com.datartproject.dataart:0.1.0'
+}
+```
+
 ## Usage
+
+Client instance requires a set of configurations passed by the `DataArt.Config` object. Default values are set for all of them except `apiKey`. You can start sending requests if no exceptions were raised in the initialization process. Keep in mind, no internal singleton pattern is developed by the client itself. It's up to you to manage your running instance.
+
+```kotlin
+val dataart = DataArt(appContext, DataArt.Config("your-api-key"))
+```
+
+### Emit Action
+
+```kotlin
+dataart.emitAction(
+    "some-event-key",
+    "some-user-key",
+    false,
+    Date(),
+    mapOf()
+)
+```
+
+### Identify
+
+```kotlin
+dataart.identify("some-user-key", mapOf())
+```
+
+## Full Example
+
+```kotlin
+import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import com.datartproject.dataart.client.DataArt
+import java.util.Date
+
+class MainActivity : AppCompatActivity() {
+    private lateinit var dataart: DataArt
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        dataart = DataArt(this, DataArt.Config("your-api-key"))
+    }
+
+    fun onButtonClicked(v: View) {
+        if (v.id == R.id.btn) {
+            dataart.emitAction(
+                "some-event-key",
+                "some-user-key",
+                false,
+                Date(),
+                mapOf()
+            )
+        }
+    }
+}
+
+```
 
 ## License
 
