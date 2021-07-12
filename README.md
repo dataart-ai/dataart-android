@@ -26,7 +26,7 @@ Now add the following dependency to your app `build.gradle` file:
 
 ```
 dependencies {
-    implementation 'com.datartproject.dataart:0.1.0'
+    implementation 'com.github.dataart-ai:dataart-android:v0.1.0'
 }
 ```
 
