@@ -38,6 +38,38 @@ Client instance requires a set of configurations passed by the `DataArt.Config` 
 val dataart = DataArt(appContext, DataArt.Config("your-api-key"))
 ```
 
+You can customize configurations using `DataArt.Config` object:
+
+```kotlin
+Config(
+    /**
+    * The authorization key for sending requests. You can find this value
+    * in your dashboard. Contact support if you need help.
+    */
+    val apiKey: String,
+    /**
+    * The number of times each request is tried before giving up.
+    */
+    val flushNumRetries: Int = DEFAULT_FLUSH_NUM_RETRIES,
+    /**
+    * The constant time (seconds) added for each execution retry. For instance
+    * a flushNumRetries of 3 and flushBackoffRatio of 10 will cause in 10, 20, 30 seconds
+    * of delay before giving up.
+    */
+    val flushBackoffRatio: Long = DEFAULT_FLUSH_BACKOFF_RATIO,
+    /**
+    * The number of action events in batch request. If you emit
+    * this much actions, a request will be created and sent.
+    */
+    val flushActionsBatchSize: Int = DEFAULT_FLUSH_ACTIONS_BATCH_SIZE,
+    /**
+    * The timer duration (milliseconds) for flushing actions. If this much time is passed
+    * and there's some actions left, they will be sent to server.
+    */
+    val flushInterval: Long = DEFAULT_FLUSH_INTERVAL
+)
+```
+
 ### Emit Action
 
 ```kotlin
