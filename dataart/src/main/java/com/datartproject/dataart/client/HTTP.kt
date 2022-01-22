@@ -13,7 +13,7 @@ data class HttpResponse(val statusCode: Int, val responseContent: String) {
 
 class DataArtHttpClient(private val apiKey: String) {
     companion object {
-        private const val prodBaseUrl = "https://sourcing.datartproject.com"
+        private const val prodBaseUrl = "https://src.datartproject.com"
         private const val baseUrl = prodBaseUrl
 
         private const val HTTP_METHOD_POST = "POST"
